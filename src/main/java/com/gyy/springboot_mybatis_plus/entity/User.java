@@ -1,20 +1,23 @@
 package com.gyy.springboot_mybatis_plus.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.gyy.springboot_mybatis_plus.enums.SexEnum;
 import lombok.Data;
+
+import static com.baomidou.mybatisplus.annotation.FieldFill.INSERT;
 
 /**
  * @author GYY
  * @date 2019/12/16 20:26
  */
 @Data
-public class User {
+//@TableName(value = "tb_user")
+public class User extends Model<User> {
     /**
      * 让id是自增的
      */
-    @TableId(type = IdType.AUTO)
+//    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -35,4 +38,13 @@ public class User {
      */
     private String email;
 
+    @Version
+    @TableField(fill = INSERT) //乐观锁字段
+    private Integer version;
+
+
+    @TableLogic //逻辑删除
+    private Integer deleted;
+
+    private SexEnum sex;
 }

@@ -6,7 +6,22 @@ spring:
     username: root
     password: 123456
 
-# Logger Config
 logging:
   level:
-    com.baomidou.mybatisplus.samples.quickstart: debug
+    com:
+      gyy:
+        springboot_mybatis_plus:
+          mapper: debug
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # 设置全局自增id策略，这样就不用在每个实体类上加 @TableId(type = IdType.AUTO)
+      id-type: auto
+      #设置逻辑删除的值
+      logic-delete-value: 1
+      #设置逻辑未删除的值
+      logic-not-delete-value: 0
+  type-enums-package: com.gyy.springboot_mybatis_plus.enums
+#      table-prefix: tb_ 设置全局表名的前缀
